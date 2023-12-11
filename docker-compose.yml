@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: .docker/app/Dockerfile.local
+        volumes:
+            - ./:/var/www
+            - ./.docker/app/php.ini:/usr/local/etc/php/conf.d/php.ini
+        ports:
+            - '5173:5173'
+        depends_on:
+            - db
+        container_name: '${APP_CONTAINER:-laravel}_app'
+        networks:
+            - app-network
+
+    nginx:
+        image: nginx:alpine
+        restart: always
+        volumes:
+            - ./:/var/www
+            - ./.docker/nginx/conf/:/etc/nginx/conf.d/
+        ports:
+            - '${APP_BACKEND_PORT:-8000}:80'
+        container_name: '${APP_CONTAINER:-laravel}_nginx'
+        networks:
+            - app-network
+
+    db:
+        image: postgres:latest
+        restart: always
+        volumes:
+            - ./.docker/db:/var/lib/postgresql/data
+        environment:
+            POSTGRES_DB: $DB_DATABASE
+            POSTGRES_USER: $DB_USERNAME
+            POSTGRES_PASSWORD: $DB_PASSWORD
+        ports:
+            - '${APP_POSTGRES_PORT:-5432}:5432'
+        container_name: '${APP_CONTAINER:-laravel}_db'
+        networks:
+            - app-network
+
+    redis:
+        image: redis:alpine
+        restart: always
+        volumes:
+            - ./.docker/redis:/data
+        ports:
+            - '${APP_REDIS_PORT:-6379}:6379'
+        container_name: '${APP_CONTAINER:-laravel}_redis'
+        networks:
+            - app-network
+
+networks:
+  app-network:
+    driver: bridge
