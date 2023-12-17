@@ -15,9 +15,9 @@ class ArticleFactory extends Factory
     {
         return [
             'name' => Str::ucfirst(fake()->words(3, true)),
-            'text' => fake()->realText,
-            'preview' => fake()->imageUrl(200, 300, null, true),
-            'detail_preview' => fake()->imageUrl(800, 600, null, true),
+            'text' => fake()->text(),
+            'preview' => fake()->imageUrl(750, 300, null, true),
+            'detail_preview' => fake()->imageUrl(1600, 1000, null, true),
             'link' => fake()->url,
             'user_id' => User::query()
                 ->whereHas('category', function (Builder $builder) {
