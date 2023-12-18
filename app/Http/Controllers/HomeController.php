@@ -11,6 +11,6 @@ class HomeController extends Controller
 {
     public function __invoke(HomeActionContract $action): Factory|Application|View
     {
-        return view('home', $action(2));
+        return view('home', $action(6));
     }
 }

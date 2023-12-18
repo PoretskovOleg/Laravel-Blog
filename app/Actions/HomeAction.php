@@ -20,7 +20,7 @@ class HomeAction implements HomeActionContract
         return Article::query()
             ->with('category:id,name')
             ->limit($count)
-            ->inRandomOrder()
+            ->latest()
             ->get(['id', 'name', 'preview', 'article_category_id']);
     }
 }
