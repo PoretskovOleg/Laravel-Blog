@@ -10,12 +10,13 @@ use App\Models\ArticleCategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Cache;
 
 class ArticleController extends Controller
 {
     public function index(ArticleCategory $category, IndexActionContract $action): Factory|Application|View
     {
-        return view('articles.list', $action($category));
+        return view('articles.list', $action($category, 6));
     }
 
     /**
@@ -31,7 +32,7 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        //
+        Cache::forget(Article::CACHE_KEY_HOME_PAGE);
     }
 
     /**
@@ -55,7 +56,7 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        Cache::forget(Article::CACHE_KEY_HOME_PAGE);
     }
 
     /**

@@ -11,13 +11,15 @@
             </div><!-- /.header-logo -->
 
             <div class="header-menu grow hidden lg:flex items-center ml-8 mr-8 gap-8">
-                <nav class="2xl:flex gap-8">
-                    <a href="{{ route('articles.index', ['category' => $defaultCategory]) }}"
-                       class="ml-4 mr-4 text-white hover:text-pink"
-                    >
-                        Статьи
-                    </a>
-                </nav>
+                @if(isset($defaultCategory))
+                    <nav class="2xl:flex gap-8">
+                        <a href="{{ route('articles.index', ['category' => $defaultCategory]) }}"
+                           class="ml-4 mr-4 text-white hover:text-pink"
+                        >
+                            Статьи
+                        </a>
+                    </nav>
+                @endif
             </div><!-- /.header-menu -->
 
             <div class="header-actions flex items-center gap-3 md:gap-5 z-[9999]">

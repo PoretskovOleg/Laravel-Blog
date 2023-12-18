@@ -6,5 +6,5 @@ use App\Models\ArticleCategory;
 
 interface IndexActionContract
 {
-    public function __invoke(ArticleCategory $category): array;
+    public function __invoke(ArticleCategory $category, int $countPerPage): array;
 }

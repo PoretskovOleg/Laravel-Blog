@@ -16,6 +16,9 @@ class ArticleCategory extends Model
 {
     use HasFactory;
 
+    const CACHE_KEY_DEFAULT_CATEGORY = 'default_category';
+    const CACHE_KEY_CATEGORIES = 'article_categories';
+
     protected $fillable = ['name'];
 
     public function articles(): HasMany
