@@ -22,6 +22,8 @@ class Article extends Model
 {
     use HasFactory;
 
+    const CACHE_KEY_HOME_PAGE = 'articles_home_page';
+
     protected $fillable = [
         'name',
         'text',
