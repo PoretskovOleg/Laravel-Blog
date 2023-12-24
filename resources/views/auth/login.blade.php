@@ -2,65 +2,53 @@
 
 @section('content')
 
-    <div class="text-center">
-        <a rel="home" href="{{ route('home') }}">
-            <img alt="CutCode"
-                 class="w-[148px] md:w-[201px] h-[36px] md:h-[50px] inline-block"
-                 src="/images/logo.svg"
-            >
-        </a>
-    </div>
-    @if(session()->has('status'))
-        <p class="max-w-[640px] mt-4 mx-auto p-6 xs:p-8 md:p-12 2xl:p-16 rounded-[20px] bg-purple mb-5">
-            {{ session()->get('status') }}
-        </p>
-    @endif
-    <div class="max-w-[640px] mt-12 mx-auto p-6 xs:p-8 md:p-12 2xl:p-16 rounded-[20px] bg-purple">
-        <h1 class="mb-5 text-lg font-semibold">Вход в аккаунт</h1>
-        <form class="space-y-3" action="{{ route('login') }}" method="POST">
-            @csrf
-            <input
-                class="w-full h-14 px-4 rounded-lg border border-[#A07BF0] bg-white/10 focus:border-pink focus:shadow-[0_0_0_2px_#EC4176] outline-none transition text-white placeholder:text-white text-xxs md:text-xs font-semibold"
-                type="email"
-                required=""
-                autofocus=""
-                autocomplete="email"
-                placeholder="E-mail"
-                name="email"
-                value="{{ old('email') }}"
-            >
+    <x-auth.logo>
+        <x-logo></x-logo>
+    </x-auth.logo>
 
-            @error('email')
-            <div class="mt-3 text-pink text-xxs xs:text-xs">{{ $message }}</div>
-            @enderror
+    <x-status></x-status>
 
-            <input
-                class="w-full h-14 px-4 rounded-lg border border-[#A07BF0] bg-white/10 focus:border-pink focus:shadow-[0_0_0_2px_#EC4176] outline-none transition text-white placeholder:text-white text-xxs md:text-xs font-semibold"
-                type="password"
-                required=""
-                autocomplete="current-password"
-                placeholder="Пароль"
-                name="password"
-            >
+    <x-auth.form action="{{ route('login') }}" title="Вход в аккаунт">
+        <x-auth.form.input
+            type="email"
+            required
+            autofocus
+            autocomplete="email"
+            placeholder="E-mail"
+            name="email"
+            value="{{ old('email') }}"
+        ></x-auth.form.input>
 
-            <button class="w-full btn btn-pink" type="submit">Войти</button>
-        </form>
+        @error('email')
+        <x-auth.form.error>{{ $message }}</x-auth.form.error>
+        @enderror
 
-        <div class="space-y-3 mt-5">
-            <div class="text-xxs md:text-xs">
-                <a class="text-white hover:text-white/70 font-bold"
-                   href="{{ route('password.forgot') }}"
+        <x-auth.form.input
+            type="password"
+            required
+            autocomplete="current-password"
+            placeholder="Пароль"
+            name="password"
+        ></x-auth.form.input>
+
+        <x-auth.form.button>Войти</x-auth.form.button>
+
+        <x-slot name="footer">
+            <x-auth.form.footer>
+                <x-auth.form.footer.item
+                    name="Забыли пароль?"
+                    route="{{ route('password.forgot') }}"
                 >
-                    Забыли пароль?
-                </a>
-            </div>
-            <div class="text-xxs md:text-xs">
-                <a class="text-white hover:text-white/70 font-bold"
-                   href="{{ route('register') }}">
-                    Регистрация
-                </a>
-            </div>
-        </div>
-    </div>
+                </x-auth.form.footer.item>
+
+                <x-auth.form.footer.item
+                    name="Регистрация"
+                    route="{{ route('register') }}"
+                >
+                </x-auth.form.footer.item>
+            </x-auth.form.footer>
+        </x-slot>
+
+    </x-auth.form>
 
 @endsection
