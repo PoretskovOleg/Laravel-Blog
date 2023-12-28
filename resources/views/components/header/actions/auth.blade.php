@@ -7,7 +7,7 @@
 
         <img alt="Username"
              class="shrink-0 w-10 h-10 rounded-full"
-             src="/images/logo.svg"
+             src="{{ auth()->user()->avatar_path }}"
         >
 
         <svg class="shrink-0 w-4 h-4 ml-3" fill="currentColor" viewBox="0 0 30 16"
@@ -24,10 +24,10 @@
         <h5 class="text-body text-xs">Мой профиль</h5>
 
         <div class="mt-3">
-            <a href="profile.html" class="flex items-center">
+            <a href="{{ route('profile') }}" class="flex items-center">
                 <img alt="Username"
                      class="w-11 h-11 rounded-full"
-                     src="/images/logo.svg"
+                     src="{{ auth()->user()->avatar_path }}"
                 >
                 <span class="ml-3 text-xs md:text-sm font-bold text-white">{{ auth()->user()->name }}</span>
             </a>

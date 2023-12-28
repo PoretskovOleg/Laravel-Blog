@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,7 +17,7 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function store(RegisterRequest $request): RedirectResponse
+    public function store(ProfileRequest $request): RedirectResponse
     {
         User::query()->create($request->validated());
 

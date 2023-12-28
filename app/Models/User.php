@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $name
  * @property string $email
  * @property string $avatar
+ * @property string $avatar_path
  * @property UserCategory $category
  * @property Collection<Article> $articles
  */
@@ -39,6 +41,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected function avatarPath(): Attribute
+    {
+        return Attribute::get(
+            fn(mixed $value, array $attributes) => !empty($attributes['avatar'])
+                ? '/storage/'.$attributes['avatar']
+                : "https://ui-avatars.com/api/?name={$attributes['name']}&color=7F9CF5&background=EBF4FF"
+        );
+    }
 
     public function category(): BelongsTo
     {

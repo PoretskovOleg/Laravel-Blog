@@ -1,5 +1,5 @@
-@if(session()->has('status'))
+@if(session('status'))
     <p class="max-w-[640px] mt-4 mx-auto p-6 xs:p-8 md:p-12 2xl:p-16 rounded-[20px] bg-purple mb-5">
-        {{ session()->get('status') }}
+        {{ session('status') }}
     </p>
 @endif
