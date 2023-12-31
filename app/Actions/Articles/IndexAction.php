@@ -24,9 +24,9 @@ class IndexAction implements IndexActionContract
     {
         return Article::query()
             ->with('category:id,name')
-            ->where('article_category_id', $category->id)
+            ->where('category_id', $category->id)
             ->latest()
-            ->paginate($countPerPage, ['id', 'article_category_id', 'name', 'preview']);
+            ->paginate($countPerPage, ['id', 'category_id', 'name', 'preview']);
     }
 
     private function getCategories(): Collection|array

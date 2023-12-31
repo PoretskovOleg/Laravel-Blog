@@ -6,32 +6,34 @@
         <x-logo></x-logo>
     </x-auth.logo>
 
-    <x-status></x-status>
+    <x-auth.form.status></x-auth.form.status>
 
-    <x-auth.form action="{{ route('login') }}" title="Вход в аккаунт">
-        <x-auth.form.input
-            type="email"
-            required
-            autofocus
-            autocomplete="email"
-            placeholder="E-mail"
-            name="email"
-            value="{{ old('email') }}"
-        ></x-auth.form.input>
+    <x-auth.form title="Вход в аккаунт">
+        <x-form action="{{ route('login') }}">
+            <x-form.input
+                type="email"
+                required
+                autofocus
+                autocomplete="email"
+                placeholder="E-mail"
+                name="email"
+                value="{{ old('email') }}"
+            ></x-form.input>
 
-        @error('email')
-        <x-auth.form.error>{{ $message }}</x-auth.form.error>
-        @enderror
+            @error('email')
+            <x-form.error>{{ $message }}</x-form.error>
+            @enderror
 
-        <x-auth.form.input
-            type="password"
-            required
-            autocomplete="current-password"
-            placeholder="Пароль"
-            name="password"
-        ></x-auth.form.input>
+            <x-form.input
+                type="password"
+                required
+                autocomplete="current-password"
+                placeholder="Пароль"
+                name="password"
+            ></x-form.input>
 
-        <x-auth.form.button>Войти</x-auth.form.button>
+            <x-form.submit-button>Войти</x-form.submit-button>
+        </x-form>
 
         <x-slot name="footer">
             <x-auth.form.footer>

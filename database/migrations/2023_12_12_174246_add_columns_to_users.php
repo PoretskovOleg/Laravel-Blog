@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\UserCategory;
+use App\Models\UserRole;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,10 +14,11 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('avatar')->nullable();
-            $table->foreignIdFor(UserCategory::class)
+            $table->foreignId('role_id')
                 ->nullable()
-                ->constrained()
-                ->nullOnDelete();
+                ->constrained('user_roles')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 
@@ -28,8 +29,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('avatar');
-            $table->dropForeignIdFor(UserCategory::class);
-            $table->dropColumn('user_category_id');
+            $table->dropForeign(['role']);
+            $table->dropColumn('role_id');
         });
     }
 };

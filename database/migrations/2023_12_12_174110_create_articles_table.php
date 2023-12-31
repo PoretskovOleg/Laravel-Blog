@@ -19,19 +19,12 @@ return new class extends Migration
             $table->text('text')->nullable(false)->comment('Текст статьи');
             $table->string('preview')->comment('Обложка статьи маленькая');
             $table->string('detail_preview')->comment('Обложка статьи большая');
-            $table->foreignIdFor(User::class)
-                ->nullable(false)
-                ->comment('Автор статьи')
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignIdFor(ArticleCategory::class)
+            $table->foreignId('category_id')
                 ->nullable(false)
                 ->comment('Категория статьи')
-                ->constrained()
+                ->constrained('article_categories')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->string('link')->comment('Ссылка на первоисточник');
             $table->timestamps();
         });
     }

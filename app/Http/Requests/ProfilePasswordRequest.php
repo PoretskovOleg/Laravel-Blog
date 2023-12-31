@@ -23,7 +23,7 @@ class ProfilePasswordRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        session()->flash('activeTab', 2);
+        session()->flash('active_tab', 2);
         parent::failedValidation($validator);
     }
 }

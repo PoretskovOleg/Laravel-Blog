@@ -2,72 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Profile\DestroyAvatarActionContract;
+use App\Contracts\Profile\IndexActionContract;
+use App\Contracts\Profile\StoreActionContract;
+use App\Contracts\Profile\StorePasswordActionContract;
 use App\Http\Requests\ProfilePasswordRequest;
 use App\Http\Requests\ProfileRequest;
-use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function index(): Factory|Application|View
+    public function index(IndexActionContract $action): Factory|Application|View
     {
-        /** @var User $authUser */
-        $authUser = auth()->user();
-        return view('profile', [
-            'avatar' => $authUser->avatar_path,
-            'issetAvatar' => !empty($authUser->avatar),
-            'email' => $authUser->email,
-            'name' => $authUser->name,
-        ]);
+        return view('profile', $action());
     }
 
-    public function store(ProfileRequest $request): RedirectResponse
+    public function store(ProfileRequest $request, StoreActionContract $action): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = auth()->user();
-        $userData = $request->validated();
-        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-            $userData['avatar'] = $request->file('avatar')->store('images/users');
-            if (!empty($authUser->avatar)) {
-                Storage::delete($authUser->avatar);
-            }
-        }
+        $action($request->validated());
 
-        $authUser->update($userData);
-
-        return back()->with([
-            'activeTab' => 1,
-            'form_1' => 'success'
-        ]);
+        return back()->with(['profile_success' => true]);
     }
 
-    public function destroyAvatar(): RedirectResponse
+    public function destroyAvatar(DestroyAvatarActionContract $action): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = auth()->user();
-        if (!empty($authUser->avatar)) {
-            Storage::delete($authUser->avatar);
-            $authUser->update(['avatar' => null]);
-        }
-
-        return back()->with([
-            'activeTab' => 1,
-        ]);
+        $action();
+        return back();
     }
 
-    public function storePassword(ProfilePasswordRequest $request): RedirectResponse
+    public function storePassword(ProfilePasswordRequest $request, StorePasswordActionContract $action): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = auth()->user();
-        $authUser->update(['password' => $request->validated('new_password')]);
+        $action($request->validated('new_password'));
 
         return back()->with([
-            'activeTab' => 2,
-            'form_2' => 'success'
+            'active_tab' => 2,
+            'password_success' => true
         ]);
     }
 }

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $code
  * @property Collection<User> $users
  */
-class UserCategory extends Model
+class UserRole extends Model
 {
     use HasFactory;
 
@@ -26,6 +26,6 @@ class UserCategory extends Model
 
     public function users(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'role_id');
     }
 }

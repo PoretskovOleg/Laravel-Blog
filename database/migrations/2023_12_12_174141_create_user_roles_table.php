@@ -12,21 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_categories', function (Blueprint $table) {
+        Schema::create('user_roles', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
             $table->string('code')->nullable(false);
         });
 
-        DB::table('user_categories')->insert([
-            [
-                'name' => 'Пользователь',
-                'code' => 'User',
-            ],
-            [
-                'name' => 'Автор',
-                'code' => 'Author',
-            ],
+        DB::table('user_roles')->insert([
             [
                 'name' => 'Администратор',
                 'code' => 'Admin',
@@ -39,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_categories');
+        Schema::dropIfExists('user_roles');
     }
 };

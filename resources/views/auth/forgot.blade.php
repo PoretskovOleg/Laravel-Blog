@@ -6,24 +6,26 @@
         <x-logo></x-logo>
     </x-auth.logo>
 
-    <x-status></x-status>
+    <x-auth.form.status></x-auth.form.status>
 
-    <x-auth.form action="{{ route('password.forgot') }}" title="Восстановление пароля">
-        <x-auth.form.input
-            type="email"
-            required
-            autofocus
-            autocomplete="email"
-            placeholder="E-mail"
-            name="email"
-            value="{{ old('email') }}"
-        ></x-auth.form.input>
+    <x-auth.form title="Восстановление пароля">
+        <x-form action="{{ route('password.forgot') }}">
+            <x-form.input
+                type="email"
+                required
+                autofocus
+                autocomplete="email"
+                placeholder="E-mail"
+                name="email"
+                value="{{ old('email') }}"
+            ></x-form.input>
 
-        @error('email')
-        <x-auth.form.error>{{ $message }}</x-auth.form.error>
-        @enderror
+            @error('email')
+            <x-form.error>{{ $message }}</x-form.error>
+            @enderror
 
-        <x-auth.form.button>Отправить</x-auth.form.button>
+            <x-form.submit-button>Отправить</x-form.submit-button>
+        </x-form>
 
         <x-slot name="footer">
             <x-auth.form.footer>
@@ -34,6 +36,7 @@
                 </x-auth.form.footer.item>
             </x-auth.form.footer>
         </x-slot>
+
     </x-auth.form>
 
 @endsection

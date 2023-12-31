@@ -3,10 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -17,8 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $email
  * @property string $avatar
  * @property string $avatar_path
- * @property UserCategory $category
- * @property Collection<Article> $articles
+ * @property UserRole $role
  */
 class User extends Authenticatable
 {
@@ -28,7 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'user_category_id',
+        'role_id',
         'avatar'
     ];
 
@@ -51,13 +48,8 @@ class User extends Authenticatable
         );
     }
 
-    public function category(): BelongsTo
+    public function role(): BelongsTo
     {
-        return $this->belongsTo(UserCategory::class,  'user_category_id');
-    }
-
-    public function articles(): HasMany
-    {
-        return $this->hasMany(Article::class);
+        return $this->belongsTo(UserRole::class);
     }
 }

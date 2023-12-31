@@ -6,42 +6,44 @@
         <x-logo></x-logo>
     </x-auth.logo>
 
-    <x-auth.form action="{{ route('password.reset') }}" title="Восстановление пароля">
-        <input type="hidden" name="token" value="{{ $token }}">
+    <x-auth.form title="Восстановление пароля">
+        <x-form action="{{ route('password.reset') }}">
+            <input type="hidden" name="token" value="{{ $token }}">
 
-        <x-auth.form.input
-            type="email"
-            required
-            readonly
-            name="email"
-            value="{{ $email }}"
-        ></x-auth.form.input>
+            <x-form.input
+                type="email"
+                required
+                readonly
+                name="email"
+                value="{{ $email }}"
+            ></x-form.input>
 
-        @error('email')
-        <x-auth.form.error>{{ $message }}</x-auth.form.error>
-        @enderror
+            @error('email')
+            <x-form.error>{{ $message }}</x-form.error>
+            @enderror
 
-        <x-auth.form.input
-            type="password"
-            required
-            autocomplete="current-password"
-            placeholder="Пароль"
-            name="password"
-        ></x-auth.form.input>
+            <x-form.input
+                type="password"
+                required
+                autocomplete="current-password"
+                placeholder="Пароль"
+                name="password"
+            ></x-form.input>
 
-        @error('password')
-        <x-auth.form.error>{{ $message }}</x-auth.form.error>
-        @enderror
+            @error('password')
+            <x-form.error>{{ $message }}</x-form.error>
+            @enderror
 
-        <x-auth.form.input
-            type="password"
-            required
-            autocomplete="new-password"
-            placeholder="Повторите пароль"
-            name="password_confirmation"
-        ></x-auth.form.input>
+            <x-form.input
+                type="password"
+                required
+                autocomplete="new-password"
+                placeholder="Повторите пароль"
+                name="password_confirmation"
+            ></x-form.input>
 
-        <x-auth.form.button>Сменить пароль</x-auth.form.button>
+            <x-form.submit-button>Сменить пароль</x-form.submit-button>
+        </x-form>
 
         <x-slot name="footer">
             <x-auth.form.footer>
