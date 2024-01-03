@@ -23,7 +23,7 @@ class HomeAction implements HomeActionContract
                 ->with('category:id,name')
                 ->limit($count)
                 ->latest()
-                ->get(['id', 'name', 'preview', 'category_id']);
+                ->get(['id', 'title', 'preview_img', 'category_id']);
         });
     }
 }

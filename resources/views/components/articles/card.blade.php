@@ -1,13 +1,13 @@
 <div class="tasks-card flex flex-col rounded-3xl md:rounded-[40px] bg-card">
     <div class="tasks-card-photo overflow-hidden h-40 xs:h-48 sm:h-[280px] rounded-3xl md:rounded-[40px]">
         <a href="{{ route('articles.show', ['article' => $article]) }}">
-            <img src="{{ $article->preview }}"
+            <img src="{{ $article->preview_img }}"
                  class="object-cover w-full h-full"
                  alt="">
         </a>
     </div>
     <div class="grow flex flex-col pt-6 sm:pt-10 pb-6 sm:pb-10 2xl:pb-14 px-5 sm:px-8 2xl:px-12">
-        <h3 class="text-md md:text-lg 2xl:text-xl font-black">{{ $article->name }}</h3>
+        <h3 class="text-md md:text-lg 2xl:text-xl font-black">{{ $article->title }}</h3>
         <div class="mt-auto">
             <div class="flex flex-wrap gap-3 mt-7">
                 <a href="{{ route('articles.index', ['category' => $article->category]) }}"

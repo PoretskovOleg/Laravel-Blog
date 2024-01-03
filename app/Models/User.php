@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -15,7 +14,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $email
  * @property string $avatar
  * @property string $avatar_path
- * @property UserRole $role
  */
 class User extends Authenticatable
 {
@@ -46,10 +44,5 @@ class User extends Authenticatable
                 ? '/storage/'.$attributes['avatar']
                 : "https://ui-avatars.com/api/?name={$attributes['name']}&color=7F9CF5&background=EBF4FF"
         );
-    }
-
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(UserRole::class);
     }
 }

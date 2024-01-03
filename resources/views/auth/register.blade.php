@@ -57,17 +57,15 @@
             <x-form.submit-button>Зарегистрироваться</x-form.submit-button>
         </x-form>
 
-        <x-slot name="footer">
-            <x-auth.form.footer>
-                <x-auth.form.footer.item
-                    class="underline underline-offset-4"
-                    name="Войти"
-                    route="{{ route('login') }}"
-                >
-                    Есть аккаунт?
-                </x-auth.form.footer.item>
-            </x-auth.form.footer>
-        </x-slot>
+        <x-auth.form.footer>
+            <x-auth.form.footer.item
+                class="underline underline-offset-4"
+                name="Войти"
+                route="{{ route('login') }}"
+            >
+                Есть аккаунт?
+            </x-auth.form.footer.item>
+        </x-auth.form.footer>
     </x-auth.form>
 
 @endsection

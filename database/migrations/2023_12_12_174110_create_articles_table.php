@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(false)->comment('Название статьи');
+            $table->string('title')->nullable(false)->comment('Название статьи');
             $table->text('text')->nullable(false)->comment('Текст статьи');
-            $table->string('preview')->comment('Обложка статьи маленькая');
-            $table->string('detail_preview')->comment('Обложка статьи большая');
+            $table->string('preview_img')->comment('Обложка статьи маленькая');
+            $table->string('detail_img')->comment('Обложка статьи большая');
             $table->foreignId('category_id')
                 ->nullable(false)
                 ->comment('Категория статьи')

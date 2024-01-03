@@ -32,10 +32,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('profile/password', [ProfileController::class, 'storePassword'])->name('profile.password');
 });
 
-Route::get('category/{category}/articles', [ArticleController::class, 'index'])
-    ->whereNumber('category')
-    ->name('articles.index');
+Route::get('articles/category/{category}', [ArticleController::class, 'index'])
+    ->whereNumber('category')->name('articles.index');
 
 Route::get('articles/{article}', [ArticleController::class, 'show'])
-    ->whereNumber('article')
-    ->name('articles.show');
+    ->whereNumber('article')->name('articles.show');

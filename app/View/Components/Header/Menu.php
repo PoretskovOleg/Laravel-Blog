@@ -17,7 +17,7 @@ class Menu extends Component
         $defaultCategory = Cache::rememberForever(
             ArticleCategory::CACHE_KEY_DEFAULT_CATEGORY,
             function () {
-                return ArticleCategory::query()->oldest()->value('id');
+                return ArticleCategory::query()->orderBy('name')->value('id');
             }
         );
 

@@ -26,13 +26,13 @@ class IndexAction implements IndexActionContract
             ->with('category:id,name')
             ->where('category_id', $category->id)
             ->latest()
-            ->paginate($countPerPage, ['id', 'category_id', 'name', 'preview']);
+            ->paginate($countPerPage, ['id', 'category_id', 'title', 'preview_img']);
     }
 
     private function getCategories(): Collection|array
     {
         return Cache::rememberForever(ArticleCategory::CACHE_KEY_CATEGORIES, function () {
-            return ArticleCategory::query()->oldest()->get(['id', 'name']);
+            return ArticleCategory::query()->orderBy('name')->get(['id', 'name']);
         });
     }
 }

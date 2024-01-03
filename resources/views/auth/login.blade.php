@@ -35,21 +35,19 @@
             <x-form.submit-button>Войти</x-form.submit-button>
         </x-form>
 
-        <x-slot name="footer">
-            <x-auth.form.footer>
-                <x-auth.form.footer.item
-                    name="Забыли пароль?"
-                    route="{{ route('password.forgot') }}"
-                >
-                </x-auth.form.footer.item>
+        <x-auth.form.footer>
+            <x-auth.form.footer.item
+                name="Забыли пароль?"
+                route="{{ route('password.forgot') }}"
+            >
+            </x-auth.form.footer.item>
 
-                <x-auth.form.footer.item
-                    name="Регистрация"
-                    route="{{ route('register') }}"
-                >
-                </x-auth.form.footer.item>
-            </x-auth.form.footer>
-        </x-slot>
+            <x-auth.form.footer.item
+                name="Регистрация"
+                route="{{ route('register') }}"
+            >
+            </x-auth.form.footer.item>
+        </x-auth.form.footer>
 
     </x-auth.form>
 

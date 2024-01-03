@@ -11,11 +11,13 @@ class ArticleFactory extends Factory
 {
     public function definition(): array
     {
+        $dir = 'images/articles/';
+        $pathDir = 'public/storage/'.$dir;
         return [
-            'name' => Str::ucfirst(fake()->words(3, true)),
+            'title' => Str::ucfirst(fake()->words(3, true)),
             'text' => fake()->text(),
-            'preview' => fake()->imageUrl(750, 300, null, true),
-            'detail_preview' => fake()->imageUrl(1600, 1000, null, true),
+            'preview_img' => $dir.fake()->image($pathDir,750, 300, null, false),
+            'detail_img' => $dir.fake()->image($pathDir,1600, 1000, null, false),
             'category_id' => ArticleCategory::query()->inRandomOrder()->value('id')
         ];
     }

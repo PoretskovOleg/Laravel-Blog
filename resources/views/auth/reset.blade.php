@@ -45,15 +45,14 @@
             <x-form.submit-button>Сменить пароль</x-form.submit-button>
         </x-form>
 
-        <x-slot name="footer">
-            <x-auth.form.footer>
-                <x-auth.form.footer.item
-                    name="Я вспомнил пароль"
-                    route="{{ route('login') }}"
-                >
-                </x-auth.form.footer.item>
-            </x-auth.form.footer>
-        </x-slot>
+        <x-auth.form.footer>
+            <x-auth.form.footer.item
+                name="Я вспомнил пароль"
+                route="{{ route('login') }}"
+            >
+            </x-auth.form.footer.item>
+        </x-auth.form.footer>
+
     </x-auth.form>
 
 @endsection
