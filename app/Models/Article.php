@@ -13,7 +13,9 @@ use Illuminate\Support\Carbon;
  * @property string $title
  * @property string $text
  * @property string $preview_img
+ * @property string $preview_img_path
  * @property string $detail_img
+ * @property string $detail_img_path
  * @property int $category_id
  * @property ArticleCategory $category
  */
@@ -36,17 +38,17 @@ class Article extends Model
         'updated_at' => 'datetime',
     ];
 
-    public function previewImg():Attribute
+    public function previewImgPath():Attribute
     {
         return Attribute::get(
-            fn($value) => '/storage/'.$value
+            fn($value, $attributes) => !empty($attributes['preview_img']) ? '/storage/'.$attributes['preview_img'] : null
         );
     }
 
-    public function detailImg():Attribute
+    public function detailImgPath():Attribute
     {
         return Attribute::get(
-            fn($value) => '/storage/'.$value
+            fn($value, $attributes) => !empty($attributes['detail_img']) ? '/storage/'.$attributes['detail_img'] : null
         );
     }
 

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable(false)->comment('Название статьи');
             $table->text('text')->nullable(false)->comment('Текст статьи');
-            $table->string('preview_img')->comment('Обложка статьи маленькая');
-            $table->string('detail_img')->comment('Обложка статьи большая');
+            $table->string('preview_img')->nullable()->comment('Обложка статьи маленькая');
+            $table->string('detail_img')->nullable()->comment('Обложка статьи большая');
             $table->foreignId('category_id')
                 ->nullable(false)
                 ->comment('Категория статьи')

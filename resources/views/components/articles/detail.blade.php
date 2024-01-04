@@ -1,4 +1,4 @@
-<img class="w-full rounded-xl my-8" src="{{ $article->detail_img }}" alt="">
+<img class="w-full rounded-xl my-8" src="{{ $article->detail_img_path }}" alt="">
 
 <div class="prose prose-lg min-w-full prose-img:rounded-xl prose-invert">
     <h1 class="text-[26px] sm:text-xl xl:text-[48px] 2xl:text-2xl font-black">

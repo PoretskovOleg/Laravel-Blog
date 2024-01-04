@@ -1,7 +1,7 @@
 <div class="tasks-card flex flex-col rounded-3xl md:rounded-[40px] bg-card">
     <div class="tasks-card-photo overflow-hidden h-40 xs:h-48 sm:h-[280px] rounded-3xl md:rounded-[40px]">
         <a href="{{ route('articles.show', ['article' => $article]) }}">
-            <img src="{{ $article->preview_img }}"
+            <img src="{{ $article->preview_img_path }}"
                  class="object-cover w-full h-full"
                  alt="">
         </a>
